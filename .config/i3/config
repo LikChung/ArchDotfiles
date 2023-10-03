@@ -43,7 +43,7 @@ bindsym $mod+d exec --no-startup-id rofi -show combi
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Launch conky.
-exec_always --no-startup-id $HOME/.config/conky/Enif/start.sh
+#exec_always --no-startup-id $HOME/.config/conky/Enif/start.sh
 
 # Display Wallpaper, always.
 exec_always feh --bg-fill $HOME/Pictures/wallpapers/whitewaves.jpg
