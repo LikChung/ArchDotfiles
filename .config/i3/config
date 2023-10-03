@@ -1,0 +1,263 @@
+##==================================================================================
+
+##  Created : Sep 25, 2023
+##  This theme is for i3wm 4.22 or newer
+## 
+##  EVERBLUSH
+##
+##  author  : Jerry Chung
+##  license : Distributed under the terms of GPLv3
+##  notes   : Need install font roboto, alacritty, rofi, polybar, conky, feh, picom, 
+##            i3lock-everblush, polkit-gnome, nm-applet, megasync
+
+##==================================================================================
+
+# Mod Key. Mod4 as win key. 
+set $mod Mod1
+
+# Font for window titles. Will also be used by i3 bar if no specify.
+font pango:roboto bold 10
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# Window title
+title_align center
+
+# Start a terminal for i3-sensible-terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+q kill
+
+# Start rofi.
+#bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Nordzy-cyan-dark" -show-icons
+bindsym $mod+d exec --no-startup-id rofi -show combi
+
+# The other mode search for applications in /usr/bin or /usr/sbin.
+# This should only be used if a program lacks a .desktop file.
+#bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+
+# Launch Polybar.
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Launch conky.
+exec_always --no-startup-id $HOME/.config/conky/Enif/start.sh
+
+# Display Wallpaper, always.
+exec_always feh --bg-fill $HOME/Pictures/wallpapers/whitewaves.jpg
+
+# Provide Gaps to Windows.
+gaps inner 5
+gaps outer 8
+
+# Compositor. This helps in transparency and fading. Need to install picom.
+exec_always picom -f
+
+# Lock Screen. Need i3lock-everblush.sh in /usr/bin
+bindsym $mod+x exec i3lock-everblush -l
+
+# Shutdown the computer
+#bindsym $mod+Shift+s exec shutdown now
+
+# Reboot Machine
+#bindsym $mod+r exec systemctl reboot
+
+# Suspend the system to RAM (needs swap space)
+#bindsym $mod+s exec systemctl suspend
+
+# Authentication enabled, need polkit-gnome.
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Waking up from a suspended system will launch i3lock-everblush
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-everblush -l
+
+# Start nm-applet 
+exec --no-startup-id nm-applet
+
+# Enable resize, copy and paste in vmware
+exec --no-startup-id vmware-user
+
+# Start megasync after fake system tray running
+exec_always --no-startup-id $HOME/.config/polybar/scripts/openTray.sh
+exec --no-startup-id "sh -c 'sleep 1; exec megasync'"
+
+# Use pactl to adjust volume in PulseAudio.
+#set $refresh_i3status killall -SIGUSR1 i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 100% && pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 100% && pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Use amixer to adjust volume in Alsa
+#bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute
+#bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute
+#bindsym XF86AudioMute exec amixer -q set Master toggle
+
+##Brightness Control
+bindsym XF86MonBrightnessUp exec sudo xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Disable focus through mouse
+focus_follows_mouse no
+
+# Change focus
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
+
+# Change focus, alternatively.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
+
+# Move focused window, alternatively.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $your_keybinding focus child
+
+# Enable workspace auto back and forth
+workspace_auto_back_and_forth no
+
+# Define names for default workspaces.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Restart i3 inplace
+bindsym $mod+Shift+r restart
+# Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Enter Resize Mode
+bindsym $mod+r mode "resize"
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        #bindsym j resize shrink width 10 px or 10 ppt
+        #bindsym k resize grow height 10 px or 10 ppt
+        #bindsym l resize shrink height 10 px or 10 ppt
+        #bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# Launch a program on a certain workspace
+for_window [class="^Code$" instance="^code$"] move container to workspace $ws2, focus
+for_window [class="^Google-chrome$" instance="^google-chrome$"] move container to workspace $ws3, focus
+for_window [class="^Thunar$" instance="^thunar$"] move container to workspace $ws4, focus
+for_window [class="^vlc$" instance="^vlc$"] move container to workspace $ws4, focus
+for_window [class="^Audacious$" instance="^audacious$"] move container to workspace $ws4, focus
+for_window [class="megasync"] move container to workspace $ws5, floating enable, focus
+for_window [class="^Github Desktop$" instance="^github desktop$"] move container to workspace $ws5, focus
+for_window [class="Gimp" instance="gimp"] move container to workspace $ws6, focus
+for_window [class="ONLYOFFICE Desktop Editors" instance="DesktopEditors"] move ontainer to workspace $ws6, focus
+for_window [class="sunloginclient"] move container to workspace $ws7, floating enable, focus
+for_window [class="Lxappearance" instance="Lxappearance"] move container to workspace $ws8, focus
+for_window [class="pamac-manager"] move container to workspace $ws8, focus
+for_window [class="Kvantum Manager" instance="kvantummanager"] move container to workspace $ws8, focus
+
+# Launch a program with a defined keybinding, on a certain workspace.
+bindsym $mod+b; exec google-chrome-stable
+bindsym $mod+c; exec code
+bindsym $mod+t; exec thunar
+
+#Multi Monitor (Dual Monitor, extended monitor)
+#Replace HDMI2 with DVI-2, VGA-2, DP-2, DVI-2 etc. Get value by typing xrandr in the terminal.
+#If X is a natural number, then;
+#eDP-X is the display used in Laptops.
+#HDMI-X is display used in Desktop connected to monitor with HDMI Cable.
+#VGA-X is display used in Desktop connected to monitor with VGA Cable.
+#exec --no-startup-id xrandr --output HDMI-2 --right-of HDMI-1 --auto
+
+# class                 border  bground text    indicator child_border
+client.focused          #474B4C #474B4C #F8F4ED #474B4C   #474B4C
+client.focused_inactive #232A2D #232A2D #F8F4ED #232A2D   #232A2D
+client.unfocused        #232A2D #232A2D #617172 #232A2D   #232A2D
+client.urgent           #E57474 #E57474 #F8F4ED #E57474   #E57474
+client.placeholder      #232A2D #232A2D #F8F4ED #232A2D   #232a2d
+client.background       #FFFFFF
