@@ -9,8 +9,8 @@ polybar tray 2>&1 | tee -a /tmp/tray.log & disown
 
 echo "System tray launched"
 
-# Kill tray after 5s.
-sleep 5s
+# Kill tray after 7s.
+sleep 7s
 u=$(xprop -name "Polybar tray window" _NET_WM_PID | grep -o '[[:digit:]]*')
 kill $u
 
