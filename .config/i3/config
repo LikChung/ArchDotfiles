@@ -29,7 +29,7 @@ title_align center
 bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+BackSpace kill
 
 # Start rofi.
 #bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Nordzy-cyan-dark" -show-icons
