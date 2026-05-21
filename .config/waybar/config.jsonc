@@ -1,0 +1,98 @@
+// Waybar config - Enif Theme (Wayland-compatible replacement for conky)
+// Modified from original conky config for Sway/Wayland
+
+{
+  // Main panel (top-left) - System info & Weather
+  "id": "enif-main",
+  "layer": "top",
+  "position": "top",
+  "margin-top": 60,
+  "margin-left": 30,
+  "width": 300,
+  "height": 500,
+  "modules-left": [
+    "custom/greeting",
+    "clock#time",
+    "clock#date",
+    "custom/weather-main",
+    "custom/network-stats"
+  ],
+  "modules-center": [],
+  "modules-right": [],
+
+  "custom/greeting": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/greeting.sh",
+    "interval": 600,
+    "on-click": "echo 'Greeting module'"
+  },
+
+  "clock#time": {
+    "format": "{:%I:%M %p}",
+    "interval": 60,
+    "tooltip-format": "{:%c}"
+  },
+
+  "clock#date": {
+    "format": "{:%A}",
+    "interval": 60,
+    "tooltip-format": "{:%c}"
+  },
+
+  "custom/weather-main": {
+    "format": " {}",
+    "exec": "$HOME/.config/waybar/scripts/weather-main.sh",
+    "interval": 300,
+    "tooltip-format": "Weather info"
+  },
+
+  "custom/network-stats": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/network-stats.sh",
+    "interval": 1,
+    "tooltip-format": "Network statistics"
+  },
+
+  // Process panel (bottom-right) - CPU & Memory
+  "id": "enif-process",
+  "layer": "top",
+  "position": "bottom",
+  "margin-bottom": 40,
+  "margin-right": 40,
+  "width": 200,
+  "height": 300,
+  "modules-left": [],
+  "modules-center": [
+    "cpu",
+    "memory",
+    "custom/process-top"
+  ],
+  "modules-right": [],
+
+  "cpu": {
+    "states": {
+      "low": 30,
+      "medium": 60,
+      "high": 90,
+      "critical": 99
+    },
+    "tooltip": true,
+    "tooltip-format": "CPU: {usage}%",
+    "format": "CPU {usage}%",
+    "interval": 1
+  },
+
+  "memory": {
+    "tooltip": true,
+    "tooltip-format": "Memory: {used:0.1f}G / {total:0.1f}G",
+    "format": "Memory {percentage}%",
+    "interval": 1
+  },
+
+  "custom/process-top": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/process-top.sh",
+    "interval": 1,
+    "tooltip-format": "Top processes"
+  }
+}

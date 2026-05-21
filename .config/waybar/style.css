@@ -1,0 +1,125 @@
+/* Waybar Enif Theme - Flexoki color scheme */
+
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: Roboto, Roboto Condensed;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window {
+    background: rgba(20, 27, 30, 0.95);
+    color: #dadada;
+    opacity: 0.95;
+}
+
+/* Main panel (top-left) styling */
+#enif-main {
+    background: rgba(20, 27, 30, 0.85);
+    color: #dadada;
+    padding: 20px;
+    margin: 60px 0 0 30px;
+}
+
+#enif-main > * {
+    padding: 5px 10px;
+    margin: 5px 0;
+}
+
+/* Process panel (bottom-right) styling */
+#enif-process {
+    background: rgba(20, 27, 30, 0.85);
+    color: #dadada;
+    padding: 20px;
+    margin: 0 40px 40px 0;
+}
+
+#enif-process > * {
+    padding: 5px 10px;
+    margin: 5px 0;
+}
+
+/* Custom modules */
+#custom-greeting {
+    color: #6cbfbf;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+#clock#time {
+    color: #dadada;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#clock#date {
+    color: #dadada;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#custom-weather-main {
+    color: #dadada;
+    font-size: 12px;
+    margin: 15px 0;
+}
+
+#custom-network-stats {
+    color: #dadada;
+    font-size: 11px;
+    margin-top: 30px;
+}
+
+#cpu {
+    color: #6cbfbf;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#cpu.low {
+    color: #a3be8c;
+}
+
+#cpu.medium {
+    color: #ebcb8b;
+}
+
+#cpu.high {
+    color: #d08770;
+}
+
+#cpu.critical {
+    color: #bf616a;
+}
+
+#memory {
+    color: #6cbfbf;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#custom-process-top {
+    color: #dadada;
+    font-size: 10px;
+    line-height: 1.5;
+    margin-top: 10px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+/* Tooltip styling */
+tooltip {
+    background: rgba(20, 27, 30, 0.95);
+    border: 1px solid #6cbfbf;
+    color: #dadada;
+    padding: 5px 10px;
+    border-radius: 0px;
+}
+
+tooltip label {
+    color: #dadada;
+}
